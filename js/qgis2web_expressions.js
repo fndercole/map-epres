@@ -757,7 +757,7 @@ function fnc_project_color(values, context) {
 
 
 
-function exp_ManzanasPoligonos_2rule0_eval_expression(context) {
+function exp_ManzanasPoligonos_4rule0_eval_expression(context) {
     // Ranking = 1 AND Fase = 'A'
 
     var feature = context.feature;
@@ -770,7 +770,7 @@ function exp_ManzanasPoligonos_2rule0_eval_expression(context) {
 }
 
 
-function exp_ManzanasPoligonos_2rule1_eval_expression(context) {
+function exp_ManzanasPoligonos_4rule1_eval_expression(context) {
     // 
 
     var feature = context.feature;

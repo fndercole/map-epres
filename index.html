@@ -8,6 +8,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css">
         <link rel="stylesheet" href="css/L.Control.Layers.Tree.css">
+        <link rel="stylesheet" href="css/L.Control.Locate.min.css">
         <link rel="stylesheet" href="css/qgis2web.css">
         <link rel="stylesheet" href="css/fontawesome-all.min.css">
         <style>
@@ -26,6 +27,7 @@
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script>
         <script src="js/L.Control.Layers.Tree.min.js"></script>
+        <script src="js/L.Control.Locate.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
         <script src="js/leaflet-hash.js"></script>
@@ -33,13 +35,13 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
-        <script src="data/ManzanasPoligonos_2.js"></script>
         <script src="data/FaseA_3.js"></script>
-        <script src="data/RadiosZoom_4.js"></script>
+        <script src="data/ManzanasPoligonos_4.js"></script>
+        <script src="data/RadiosZoom_5.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[-33.15013827793196,-64.40000127547357],[-33.10214301867557,-64.29611891258183]]);
+        }).fitBounds([[-33.137093887456174,-64.38336824019764],[-33.11309597105295,-64.33142705875196]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -74,6 +76,7 @@
         var zoomControl = L.control.zoom({
             position: 'topleft'
         }).addTo(map);
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
@@ -102,75 +105,18 @@
         });
         layer_CartoDBLight_1;
         map.addLayer(layer_CartoDBLight_1);
-        function pop_ManzanasPoligonos_2(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Alatorio2024Octubre'] !== null ? autolinker.link(feature.properties['Alatorio2024Octubre'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Ranking'] !== null ? autolinker.link(feature.properties['Ranking'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td class="visible-with-data" id="Zona"colspan="2"><strong>Zona</strong><br />' + (feature.properties['Zona'] !== null ? autolinker.link(feature.properties['Zona'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td class="visible-with-data" id="Fase"colspan="2"><strong>Fase</strong><br />' + (feature.properties['Fase'] !== null ? autolinker.link(feature.properties['Fase'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td class="visible-with-data" id="Fraccion"colspan="2"><strong>Fraccion</strong><br />' + (feature.properties['Fraccion'] !== null ? autolinker.link(feature.properties['Fraccion'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td class="visible-with-data" id="Radio"colspan="2"><strong>Radio</strong><br />' + (feature.properties['Radio'] !== null ? autolinker.link(feature.properties['Radio'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-        function style_ManzanasPoligonos_2_0(feature) {
-            var context = {
-                feature: feature,
-                variables: {}
-            };
-            // Start of if blocks and style check logic
-            if (exp_ManzanasPoligonos_2rule0_eval_expression(context)) {
-                  return {
-                pane: 'pane_ManzanasPoligonos_2',
-                stroke: false, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(0,0,0,0.3)',
-                interactive: false,
-            };
-                }
-                else if (exp_ManzanasPoligonos_2rule1_eval_expression(context)) {
-                  return {
-                pane: 'pane_ManzanasPoligonos_2',
-                stroke: false, 
-                fillOpacity: 0,
-                interactive: false,
-            };
-                }
-            else {
-                return {fill: false, stroke: false};
-            }
-        }
-        map.createPane('pane_ManzanasPoligonos_2');
-        map.getPane('pane_ManzanasPoligonos_2').style.zIndex = 402;
-        map.getPane('pane_ManzanasPoligonos_2').style['mix-blend-mode'] = 'normal';
-        var layer_ManzanasPoligonos_2 = new L.geoJson(json_ManzanasPoligonos_2, {
-            attribution: '',
-            interactive: false,
-            dataVar: 'json_ManzanasPoligonos_2',
-            layerName: 'layer_ManzanasPoligonos_2',
-            pane: 'pane_ManzanasPoligonos_2',
-            onEachFeature: pop_ManzanasPoligonos_2,
-            style: style_ManzanasPoligonos_2_0,
+        map.createPane('pane_GoogleSatellite_2');
+        map.getPane('pane_GoogleSatellite_2').style.zIndex = 402;
+        var layer_GoogleSatellite_2 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_2',
+            opacity: 1.0,
+            attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map data ©2015 Google</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
         });
-        bounds_group.addLayer(layer_ManzanasPoligonos_2);
-        map.addLayer(layer_ManzanasPoligonos_2);
+        layer_GoogleSatellite_2;
         function pop_FaseA_3(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
@@ -274,7 +220,81 @@
         });
         bounds_group.addLayer(layer_FaseA_3);
         map.addLayer(layer_FaseA_3);
-        function pop_RadiosZoom_4(feature, layer) {
+        function pop_ManzanasPoligonos_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Alatorio2024Octubre'] !== null ? autolinker.link(feature.properties['Alatorio2024Octubre'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Ranking'] !== null ? autolinker.link(feature.properties['Ranking'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td class="visible-with-data" id="Zona"colspan="2"><strong>Zona</strong><br />' + (feature.properties['Zona'] !== null ? autolinker.link(feature.properties['Zona'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td class="visible-with-data" id="Fase"colspan="2"><strong>Fase</strong><br />' + (feature.properties['Fase'] !== null ? autolinker.link(feature.properties['Fase'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td class="visible-with-data" id="Fraccion"colspan="2"><strong>Fraccion</strong><br />' + (feature.properties['Fraccion'] !== null ? autolinker.link(feature.properties['Fraccion'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td class="visible-with-data" id="Radio"colspan="2"><strong>Radio</strong><br />' + (feature.properties['Radio'] !== null ? autolinker.link(feature.properties['Radio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+        function style_ManzanasPoligonos_4_0(feature) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            // Start of if blocks and style check logic
+            if (exp_ManzanasPoligonos_4rule0_eval_expression(context)) {
+                  return {
+                pane: 'pane_ManzanasPoligonos_4',
+                opacity: 1,
+                color: 'rgba(255,191,0,0.3)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,0.3)',
+                interactive: false,
+            };
+                }
+                else if (exp_ManzanasPoligonos_4rule1_eval_expression(context)) {
+                  return {
+                pane: 'pane_ManzanasPoligonos_4',
+                stroke: false, 
+                fillOpacity: 0,
+                interactive: false,
+            };
+                }
+            else {
+                return {fill: false, stroke: false};
+            }
+        }
+        map.createPane('pane_ManzanasPoligonos_4');
+        map.getPane('pane_ManzanasPoligonos_4').style.zIndex = 404;
+        map.getPane('pane_ManzanasPoligonos_4').style['mix-blend-mode'] = 'normal';
+        var layer_ManzanasPoligonos_4 = new L.geoJson(json_ManzanasPoligonos_4, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_ManzanasPoligonos_4',
+            layerName: 'layer_ManzanasPoligonos_4',
+            pane: 'pane_ManzanasPoligonos_4',
+            onEachFeature: pop_ManzanasPoligonos_4,
+            style: style_ManzanasPoligonos_4_0,
+        });
+        bounds_group.addLayer(layer_ManzanasPoligonos_4);
+        map.addLayer(layer_ManzanasPoligonos_4);
+        function pop_RadiosZoom_5(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
@@ -326,35 +346,36 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_RadiosZoom_4_0() {
+        function style_RadiosZoom_5_0() {
             return {
                 fill: false,
                 stroke: false,
                 interactive: false
             }
         }
-        map.createPane('pane_RadiosZoom_4');
-        map.getPane('pane_RadiosZoom_4').style.zIndex = 404;
-        map.getPane('pane_RadiosZoom_4').style['mix-blend-mode'] = 'normal';
-        var layer_RadiosZoom_4 = new L.geoJson(json_RadiosZoom_4, {
+        map.createPane('pane_RadiosZoom_5');
+        map.getPane('pane_RadiosZoom_5').style.zIndex = 405;
+        map.getPane('pane_RadiosZoom_5').style['mix-blend-mode'] = 'normal';
+        var layer_RadiosZoom_5 = new L.geoJson(json_RadiosZoom_5, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_RadiosZoom_4',
-            layerName: 'layer_RadiosZoom_4',
-            pane: 'pane_RadiosZoom_4',
-            onEachFeature: pop_RadiosZoom_4,
-            style: style_RadiosZoom_4_0,
+            dataVar: 'json_RadiosZoom_5',
+            layerName: 'layer_RadiosZoom_5',
+            pane: 'pane_RadiosZoom_5',
+            onEachFeature: pop_RadiosZoom_5,
+            style: style_RadiosZoom_5_0,
         });
-        bounds_group.addLayer(layer_RadiosZoom_4);
+        bounds_group.addLayer(layer_RadiosZoom_5);
         var baseMaps = {};
         var overlaysTree = [
         {label: '<b>Límites Políticos</b>', selectAllCheckbox: true, children: [
-            {label: 'Radios Zoom', layer: layer_RadiosZoom_4},]},
+            {label: 'Radios Zoom', layer: layer_RadiosZoom_5},]},
+        {label: '<b>Manzanas</b>', selectAllCheckbox: true, children: [
+            {label: 'Manzanas Poligonos<br /><table><tr><td style="text-align: center;"><img src="legend/ManzanasPoligonos_4_0.png" /></td><td></td></tr><tr><td style="text-align: center;"><img src="legend/ManzanasPoligonos_4_1.png" /></td><td></td></tr></table>', layer: layer_ManzanasPoligonos_4},]},
         {label: '<b>Fases</b>', selectAllCheckbox: true, children: [
             {label: 'Fase A<br /><table><tr><td style="text-align: center;"><img src="legend/FaseA_3_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/FaseA_3_21.png" /></td><td>2</td></tr><tr><td style="text-align: center;"><img src="legend/FaseA_3_32.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/FaseA_3_43.png" /></td><td>4</td></tr></table>', layer: layer_FaseA_3},]},
-        {label: '<b>Manzanas</b>', selectAllCheckbox: true, children: [
-            {label: 'Manzanas Poligonos<br /><table><tr><td style="text-align: center;"><img src="legend/ManzanasPoligonos_2_0.png" /></td><td></td></tr><tr><td style="text-align: center;"><img src="legend/ManzanasPoligonos_2_1.png" /></td><td></td></tr></table>', layer: layer_ManzanasPoligonos_2},]},
         {label: '<b>Mapas de Base</b>', selectAllCheckbox: true, children: [
+            {label: "Google Satellite", layer: layer_GoogleSatellite_2},
             {label: "CartoDB Light", layer: layer_CartoDBLight_1},
             {label: "CartoDB Dark", layer: layer_CartoDBDark_0},]},]
         var lay = L.control.layers.tree(null, overlaysTree,{
@@ -381,15 +402,15 @@
               addLabel(layer, i);
               i++;
         });
-        resetLabels([layer_ManzanasPoligonos_2,layer_FaseA_3]);
+        resetLabels([layer_FaseA_3,layer_ManzanasPoligonos_4]);
         map.on("zoomend", function(){
-            resetLabels([layer_ManzanasPoligonos_2,layer_FaseA_3]);
+            resetLabels([layer_FaseA_3,layer_ManzanasPoligonos_4]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_ManzanasPoligonos_2,layer_FaseA_3]);
+            resetLabels([layer_FaseA_3,layer_ManzanasPoligonos_4]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_ManzanasPoligonos_2,layer_FaseA_3]);
+            resetLabels([layer_FaseA_3,layer_ManzanasPoligonos_4]);
         });
         </script>
     </body>

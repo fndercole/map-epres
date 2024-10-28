@@ -757,7 +757,7 @@ function fnc_project_color(values, context) {
 
 
 
-function exp_ManzanasPoligonos_4rule0_eval_expression(context) {
+function exp_ManzanasSeleccionadas_3rule0_eval_expression(context) {
     // Ranking = 1 AND Fase = 'A'
 
     var feature = context.feature;
@@ -770,14 +770,27 @@ function exp_ManzanasPoligonos_4rule0_eval_expression(context) {
 }
 
 
-function exp_ManzanasPoligonos_4rule1_eval_expression(context) {
-    // 
+function exp_Radios_5rule0_eval_expression(context) {
+    // Fase = 'A'
 
     var feature = context.feature;
     
     if (feature.properties) {
-        return null;
+        return (feature.properties['Fase']  == 'A');
     } else {
-        return null;
+        return (feature['Fase']  == 'A');
+    }
+}
+
+
+function exp_Radios_5rule1_eval_expression(context) {
+    // NOT ( Fase = 'A' )
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return ! (feature.properties['Fase']  == 'A') ;
+    } else {
+        return ! (feature['Fase']  == 'A') ;
     }
 }

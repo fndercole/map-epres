@@ -11,7 +11,6 @@
         <link rel="stylesheet" href="css/L.Control.Locate.min.css">
         <link rel="stylesheet" href="css/qgis2web.css">
         <link rel="stylesheet" href="css/fontawesome-all.min.css">
-        <link rel="stylesheet" href="css/leaflet-search.css">
         <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
         <style>
         html, body, #map {
@@ -38,14 +37,13 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
-        <script src="js/leaflet-search.js"></script>
         <script src="data/ManzanasSeleccionadas_3.js"></script>
-        <script src="data/Zonas_4.js"></script>
-        <script src="data/Radios_5.js"></script>
+        <script src="data/Radios_4.js"></script>
+        <script src="data/Zonas_5.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[-33.18007719318424,-64.43471656097996],[-33.08409318957206,-64.22695183519718]]);
+        }).fitBounds([[-33.17648406478568,-64.46531995414328],[-33.078765818153414,-64.25233674632929]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -174,12 +172,32 @@
                 weight: 4.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(255,0,3,0.5)',
+                fillColor: 'rgba(128,0,0,0.5)',
+                interactive: false,
+            };
+                }
+                else if (exp_ManzanasSeleccionadas_3rule1_eval_expression(context)) {
+                  return {
+                pane: 'pane_ManzanasSeleccionadas_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 4.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,126,128,0.5)',
                 interactive: false,
             };
                 }
             else {
-                return {fill: false, stroke: false};
+                return {
+                pane: 'pane_ManzanasSeleccionadas_3',
+                stroke: false, 
+                fillOpacity: 0,
+                interactive: false,
+            };
             }
         }
         map.createPane('pane_ManzanasSeleccionadas_3');
@@ -196,7 +214,101 @@
         });
         bounds_group.addLayer(layer_ManzanasSeleccionadas_3);
         map.addLayer(layer_ManzanasSeleccionadas_3);
-        function pop_Zonas_4(feature, layer) {
+        function pop_Radios_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td class="visible-with-data" id="Zona"colspan="2"><strong>Zona</strong><br />' + (feature.properties['Zona'] !== null ? autolinker.link(feature.properties['Zona'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td class="visible-with-data" id="Fase"colspan="2"><strong>Fase</strong><br />' + (feature.properties['Fase'] !== null ? autolinker.link(feature.properties['Fase'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td class="visible-with-data" id="Fraccion"colspan="2"><strong>Fraccion</strong><br />' + (feature.properties['Fraccion'] !== null ? autolinker.link(feature.properties['Fraccion'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td class="visible-with-data" id="Radio"colspan="2"><strong>Radio</strong><br />' + (feature.properties['Radio'] !== null ? autolinker.link(feature.properties['Radio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td class="visible-with-data" id="Etiqueta"colspan="2"><strong>Etiqueta</strong><br />' + (feature.properties['Etiqueta'] !== null ? autolinker.link(feature.properties['Etiqueta'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td class="visible-with-data" id="Encuestas"colspan="2"><strong>Encuestas</strong><br />' + (feature.properties['Encuestas'] !== null ? autolinker.link(feature.properties['Encuestas'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+        function style_Radios_4_0(feature) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            // Start of if blocks and style check logic
+            if (exp_Radios_4rule0_eval_expression(context)) {
+                  return {
+                pane: 'pane_Radios_4',
+                opacity: 1,
+                color: 'rgba(128,0,0,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,0,0,0.5)',
+                interactive: true,
+            };
+                }
+                else if (exp_Radios_4rule1_eval_expression(context)) {
+                  return {
+                pane: 'pane_Radios_4',
+                opacity: 1,
+                color: 'rgba(0,126,128,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,253,255,0.5)',
+                interactive: true,
+            };
+                }
+                else if (exp_Radios_4rule2_eval_expression(context)) {
+                  return {
+                pane: 'pane_Radios_4',
+                opacity: 1,
+                color: 'rgba(128,128,128,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fillOpacity: 0,
+                interactive: true,
+            };
+                }
+            else {
+                return {fill: false, stroke: false};
+            }
+        }
+        map.createPane('pane_Radios_4');
+        map.getPane('pane_Radios_4').style.zIndex = 404;
+        map.getPane('pane_Radios_4').style['mix-blend-mode'] = 'normal';
+        var layer_Radios_4 = new L.geoJson(json_Radios_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Radios_4',
+            layerName: 'layer_Radios_4',
+            pane: 'pane_Radios_4',
+            onEachFeature: pop_Radios_4,
+            style: style_Radios_4_0,
+        });
+        bounds_group.addLayer(layer_Radios_4);
+        map.addLayer(layer_Radios_4);
+        function pop_Zonas_5(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
@@ -251,112 +363,33 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Zonas_4_0() {
+        function style_Zonas_5_0() {
             return {
-                pane: 'pane_Zonas_4',
+                pane: 'pane_Zonas_5',
                 opacity: 1,
-                color: 'rgba(0,0,0,0.5)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 4.0, 
-                fillOpacity: 0,
-                interactive: false,
-            }
-        }
-        map.createPane('pane_Zonas_4');
-        map.getPane('pane_Zonas_4').style.zIndex = 404;
-        map.getPane('pane_Zonas_4').style['mix-blend-mode'] = 'normal';
-        var layer_Zonas_4 = new L.geoJson(json_Zonas_4, {
-            attribution: '',
-            interactive: false,
-            dataVar: 'json_Zonas_4',
-            layerName: 'layer_Zonas_4',
-            pane: 'pane_Zonas_4',
-            onEachFeature: pop_Zonas_4,
-            style: style_Zonas_4_0,
-        });
-        bounds_group.addLayer(layer_Zonas_4);
-        map.addLayer(layer_Zonas_4);
-        function pop_Radios_5(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <td class="visible-with-data" id="Zona"colspan="2"><strong>Zona</strong><br />' + (feature.properties['Zona'] !== null ? autolinker.link(feature.properties['Zona'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td class="visible-with-data" id="Fase"colspan="2"><strong>Fase</strong><br />' + (feature.properties['Fase'] !== null ? autolinker.link(feature.properties['Fase'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td class="visible-with-data" id="Fraccion"colspan="2"><strong>Fraccion</strong><br />' + (feature.properties['Fraccion'] !== null ? autolinker.link(feature.properties['Fraccion'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td class="visible-with-data" id="Radio"colspan="2"><strong>Radio</strong><br />' + (feature.properties['Radio'] !== null ? autolinker.link(feature.properties['Radio'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td class="visible-with-data" id="Etiqueta"colspan="2"><strong>Etiqueta</strong><br />' + (feature.properties['Etiqueta'] !== null ? autolinker.link(feature.properties['Etiqueta'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td class="visible-with-data" id="Encuestas"colspan="2"><strong>Encuestas</strong><br />' + (feature.properties['Encuestas'] !== null ? autolinker.link(feature.properties['Encuestas'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-        function style_Radios_5_0(feature) {
-            var context = {
-                feature: feature,
-                variables: {}
-            };
-            // Start of if blocks and style check logic
-            if (exp_Radios_5rule0_eval_expression(context)) {
-                  return {
-                pane: 'pane_Radios_5',
-                opacity: 1,
-                color: 'rgba(255,0,0,0.5)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 4.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,0,0,0.5)',
-                interactive: true,
-            };
-                }
-                else if (exp_Radios_5rule1_eval_expression(context)) {
-                  return {
-                pane: 'pane_Radios_5',
-                opacity: 1,
-                color: 'rgba(128,128,128,0.5)',
+                color: 'rgba(0,0,0,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 2.0, 
                 fillOpacity: 0,
-                interactive: true,
-            };
-                }
-            else {
-                return {fill: false, stroke: false};
+                interactive: false,
             }
         }
-        map.createPane('pane_Radios_5');
-        map.getPane('pane_Radios_5').style.zIndex = 405;
-        map.getPane('pane_Radios_5').style['mix-blend-mode'] = 'normal';
-        var layer_Radios_5 = new L.geoJson(json_Radios_5, {
+        map.createPane('pane_Zonas_5');
+        map.getPane('pane_Zonas_5').style.zIndex = 405;
+        map.getPane('pane_Zonas_5').style['mix-blend-mode'] = 'normal';
+        var layer_Zonas_5 = new L.geoJson(json_Zonas_5, {
             attribution: '',
-            interactive: true,
-            dataVar: 'json_Radios_5',
-            layerName: 'layer_Radios_5',
-            pane: 'pane_Radios_5',
-            onEachFeature: pop_Radios_5,
-            style: style_Radios_5_0,
+            interactive: false,
+            dataVar: 'json_Zonas_5',
+            layerName: 'layer_Zonas_5',
+            pane: 'pane_Zonas_5',
+            onEachFeature: pop_Zonas_5,
+            style: style_Zonas_5_0,
         });
-        bounds_group.addLayer(layer_Radios_5);
-        map.addLayer(layer_Radios_5);
+        bounds_group.addLayer(layer_Zonas_5);
+        map.addLayer(layer_Zonas_5);
         var osmGeocoder = new L.Control.Geocoder({
             collapsed: true,
             position: 'topleft',
@@ -367,13 +400,12 @@
         .className += ' fa fa-search';
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .title += 'Search for a place';
-        var baseMaps = {};
         var overlaysTree = [
         {label: '<b>Límites Políticos</b>', selectAllCheckbox: true, children: [
-            {label: 'Radios<br /><table><tr><td style="text-align: center;"><img src="legend/Radios_5_FaseA0.png" /></td><td>Fase A</td></tr><tr><td style="text-align: center;"><img src="legend/Radios_5_OtrasFases1.png" /></td><td>Otras Fases</td></tr></table>', layer: layer_Radios_5},
-            {label: '<img src="legend/Zonas_4.png" /> Zonas', layer: layer_Zonas_4},]},
+            {label: '<img src="legend/Zonas_5.png" /> Zonas', layer: layer_Zonas_5},
+            {label: 'Radios<br /><table><tr><td style="text-align: center;"><img src="legend/Radios_4_FaseA0.png" /></td><td>Fase A</td></tr><tr><td style="text-align: center;"><img src="legend/Radios_4_FaseB1.png" /></td><td>Fase B</td></tr><tr><td style="text-align: center;"><img src="legend/Radios_4_OtrasFases2.png" /></td><td>Otras Fases</td></tr></table>', layer: layer_Radios_4},]},
         {label: '<b>Manzanas</b>', selectAllCheckbox: true, children: [
-            {label: 'Manzanas Seleccionadas<br /><table><tr><td style="text-align: center;"><img src="legend/ManzanasSeleccionadas_3_FaseA0.png" /></td><td>Fase A</td></tr></table>', layer: layer_ManzanasSeleccionadas_3},]},
+            {label: 'Manzanas Seleccionadas<br /><table><tr><td style="text-align: center;"><img src="legend/ManzanasSeleccionadas_3_FaseA0.png" /></td><td>Fase A</td></tr><tr><td style="text-align: center;"><img src="legend/ManzanasSeleccionadas_3_FaseB1.png" /></td><td>Fase B</td></tr><tr><td style="text-align: center;"><img src="legend/ManzanasSeleccionadas_3_Noseleccionadas2.png" /></td><td>No seleccionadas</td></tr></table>', layer: layer_ManzanasSeleccionadas_3},]},
         {label: '<b>Mapas de Base</b>', selectAllCheckbox: true, children: [
             {label: "Google Satellite", layer: layer_GoogleSatellite_2},
             {label: "CartoDB Light", layer: layer_CartoDBLight_1},
@@ -390,34 +422,27 @@
         lay.addTo(map);
         setBounds();
         var i = 0;
-        layer_Radios_5.eachLayer(function(layer) {
+        layer_Radios_4.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['Etiqueta'] !== null?String('<div style="color: #000000; font-size: 10pt; font-weight: bold; font-family: \'Carlito\', sans-serif;">' + layer.feature.properties['Etiqueta']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Radios_5'});
+            layer.bindTooltip((layer.feature.properties['Etiqueta'] !== null?String('<div style="color: #000000; font-size: 10pt; font-weight: bold; font-family: \'Carlito\', sans-serif;">' + layer.feature.properties['Etiqueta']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Radios_4'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
               addLabel(layer, i);
               i++;
         });
-        map.addControl(new L.Control.Search({
-            layer: layer_Radios_5,
-            initial: false,
-            hideMarkerOnCollapse: true,
-            propertyName: 'Etiqueta'}));
-        document.getElementsByClassName('search-button')[0].className +=
-         ' fa fa-binoculars';
-        resetLabels([layer_Radios_5]);
+        resetLabels([layer_Radios_4]);
         map.on("zoomend", function(){
-            resetLabels([layer_Radios_5]);
+            resetLabels([layer_Radios_4]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_Radios_5]);
+            resetLabels([layer_Radios_4]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_Radios_5]);
+            resetLabels([layer_Radios_4]);
         });
         </script>
     </body>
